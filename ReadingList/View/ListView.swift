@@ -9,10 +9,16 @@ import SwiftUI
 
 struct ListView: View {
     var body: some View {
-        VStack {
-            Text("Add book")
+        NavigationView {
+            VStack {
+                NavigationLink(destination: AddBookView(),
+                    label: {
+                        Text("Add book")
+                })
 
+            }
         }
+        
     }
 }
 
