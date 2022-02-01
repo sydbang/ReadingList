@@ -14,9 +14,9 @@ class BookModel: ObservableObject {
     @Published var statuses: [String] = ["Plan to read", "Currently reading", "Completed"]
     
     init() {
-        //getGenres()
+        getGenres()
     }
-    /*
+    
     func getGenres() {
         for book in books {
             if genres.contains(book.genre) {
@@ -26,5 +26,5 @@ class BookModel: ObservableObject {
             }
         }
     }
- */
+ 
 }

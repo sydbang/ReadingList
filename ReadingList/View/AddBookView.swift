@@ -65,6 +65,13 @@ struct AddBookView: View {
                     }
                 }
                 
+                Button {
+                    // TDB action to submit book
+                    
+                } label: {
+                    Text("Submit Book")
+                }
+                
             }
         }
     }

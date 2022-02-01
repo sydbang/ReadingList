@@ -22,7 +22,7 @@ struct ContentView: View {
                 }
                 .tag(Constants.homeTab)
             
-            SearchView()
+            GenreView()
                 .tabItem{
                     VStack {
                         Image(systemName: "folder")
