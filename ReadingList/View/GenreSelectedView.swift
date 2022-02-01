@@ -12,7 +12,7 @@ struct GenreSelectedView: View {
     var genre: String
     
     var body: some View {
-        Text(genre)
+        Text(genre).font(.title2)
     }
 }
 
