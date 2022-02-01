@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Book: Decodable, Identifiable, ObservableObject {
+struct Book: Identifiable{
     
     // ID is the document ID in the Firestore database
     var id: String

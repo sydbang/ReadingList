@@ -16,7 +16,7 @@ struct AddBookView: View {
     @State var bookPages: String = ""
     @State var selectedRating: Int = 0
     @State var selectedStatus: Int = 0
-    @State var selectedGenre: Int = 2
+    @State var selectedGenre: Int = 0
     
     var body: some View {
         

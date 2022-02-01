@@ -12,7 +12,7 @@ struct BookDetailView: View {
     @EnvironmentObject var model: BookModel
     @State var selectedRating: Int = 0
     @State var selectedStatus: Int = 0
-    @State var selectedGenre: Int = 2
+    @State var selectedGenre: Int = 0
     
     var book: Book
     
