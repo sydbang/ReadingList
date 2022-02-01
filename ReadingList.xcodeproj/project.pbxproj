@@ -19,6 +19,7 @@
 		3BD7F9EB27A47B50003274D5 /* BookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD7F9EA27A47B50003274D5 /* BookModel.swift */; };
 		3BD7F9EF27A4851F003274D5 /* BookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD7F9EE27A4851F003274D5 /* BookDetailView.swift */; };
 		3BD7F9FF27A8DC75003274D5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3BD7F9FE27A8DC75003274D5 /* GoogleService-Info.plist */; };
+		3BD7FA0427A8E061003274D5 /* GenreSelectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD7FA0327A8E061003274D5 /* GenreSelectedView.swift */; };
 		9DA6AD9447E0AB38A7617539 /* Pods_ReadingList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A31DF98857D0E3644716C7F /* Pods_ReadingList.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +39,7 @@
 		3BD7F9EA27A47B50003274D5 /* BookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookModel.swift; sourceTree = "<group>"; };
 		3BD7F9EE27A4851F003274D5 /* BookDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailView.swift; sourceTree = "<group>"; };
 		3BD7F9FE27A8DC75003274D5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3BD7FA0327A8E061003274D5 /* GenreSelectedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreSelectedView.swift; sourceTree = "<group>"; };
 		74A923E532BF53D5263469FF /* Pods-ReadingList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReadingList.release.xcconfig"; path = "Target Support Files/Pods-ReadingList/Pods-ReadingList.release.xcconfig"; sourceTree = "<group>"; };
 		9470E217F6F920320687CFB6 /* Pods-ReadingList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReadingList.debug.xcconfig"; path = "Target Support Files/Pods-ReadingList/Pods-ReadingList.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -104,6 +106,7 @@
 				3BD7F96227A46928003274D5 /* GenreView.swift */,
 				3BD7F96527A46988003274D5 /* AddBookView.swift */,
 				3BD7F9EE27A4851F003274D5 /* BookDetailView.swift */,
+				3BD7FA0327A8E061003274D5 /* GenreSelectedView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				3BD7F97B27A475DC003274D5 /* Book.swift in Sources */,
 				3BD7F93827A1E599003274D5 /* ContentView.swift in Sources */,
 				3BD7F9EF27A4851F003274D5 /* BookDetailView.swift in Sources */,
+				3BD7FA0427A8E061003274D5 /* GenreSelectedView.swift in Sources */,
 				3BD7F9EB27A47B50003274D5 /* BookModel.swift in Sources */,
 				3BD7F93627A1E599003274D5 /* ReadingListApp.swift in Sources */,
 				3BD7F95A27A46684003274D5 /* ListView.swift in Sources */,

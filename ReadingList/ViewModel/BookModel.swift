@@ -18,6 +18,10 @@ class BookModel: ObservableObject {
     }
     
     func getGenres() {
+        
+        // This function should be able to fetch data from database
+        
+        
         for book in books {
             if genres.contains(book.genre) {
                 continue
@@ -25,6 +29,10 @@ class BookModel: ObservableObject {
                 genres.append(book.genre)
             }
         }
+    }
+    
+    func addGenre(newGenre: String) {
+        
     }
  
 }
