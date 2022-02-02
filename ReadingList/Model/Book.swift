@@ -14,7 +14,7 @@ struct Book: Identifiable{
     var title: String
     var author: String
     var pageNumber: Int
-    var rating: String
+    var rating: Int
     var status: String
     var genre: String
     
