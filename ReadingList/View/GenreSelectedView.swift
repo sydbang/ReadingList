@@ -9,10 +9,21 @@ import SwiftUI
 
 struct GenreSelectedView: View {
     
+    @EnvironmentObject var model: BookModel
+    
     var genre: String
     
     var body: some View {
-        Text(genre).font(.title2)
+        
+        VStack {
+            Text(genre).font(.title2)
+            
+            
+            
+            
+        }
+        
+        
     }
 }
 

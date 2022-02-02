@@ -26,7 +26,6 @@ class BookModel: ObservableObject {
         // Read the documents at a specific path
         let dbBooks = db.collection("Books")
         
-        
         dbBooks.getDocuments { (querySnapshot, error) in
             if let error = error {
                 print(error.localizedDescription)
@@ -34,17 +33,17 @@ class BookModel: ObservableObject {
             } else if let querySnapshot = querySnapshot {
                 // Get all documents and create instances of the books
                 
-                for doc in querySnapshot.documents {
-                    print(doc.documentID)
-                }
-                
+                /* Test block
+                 for doc in querySnapshot.documents {
+                 print(doc.documentID)
+                 }
+                 */
                 
                 //Update the list property in the main thread since it causes UI change
                 DispatchQueue.main.async {
                     print("async start");
                     self.books = querySnapshot.documents.map { doc in
                         // map function iterates through the document array and performs the code on each of the items and return the result in collection
-                        print(doc["title"]);
                         
                         
                         return Book(id: doc.documentID,
@@ -55,15 +54,9 @@ class BookModel: ObservableObject {
                                     status: doc["status"] as? String ?? "",
                                     genre: doc["genre"] as? String ?? "")
                     }
-
+                    
                     for book in self.books {
-                        if self.genres.contains(book.genre) {
-                            print(book.genre)
-                            continue
-                        } else {
-                            self.genres.append(book.genre)
-                            print(book.genre)
-                        }
+                        self.addGenre(newGenre: book.genre)
                     }
                 }
             } else {
@@ -71,12 +64,62 @@ class BookModel: ObservableObject {
                 print("data didn't come through")
             }
         }
-
+        
         
     }
     
     func addGenre(newGenre: String) {
-    
+        if self.genres.contains(newGenre) {
+            return
+        } else {
+            self.genres.append(newGenre)
+        }
     }
- 
+    
+    func addBook(title: String, author: String, pageNum: String, rating: Int, status: Int, genre: Int) {
+        let db = Firestore.firestore()
+        let dbBooks = db.collection("Books")
+        
+        let intPageNum = Int(pageNum)
+        let statusString = self.statuses[status]
+        let genreString = self.genres[genre]
+        
+        dbBooks.document().setData(["title": title, "author": author, "pageNum": intPageNum ?? 0, "rating": rating, "status": statusString, "genre": genreString])
+        
+        // refetch data
+        getGenres()
+    }
+    
+    func getBooksByGenre(genre: String) {
+        
+        let db = Firestore.firestore()
+        let dbBooks = db.collection("Books")
+        
+        let query = dbBooks.whereField("genre", arrayContains: genre)
+        
+        query.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else if let querySnapshot = querySnapshot {
+                DispatchQueue.main.async {
+                    print("async start");
+                    self.books = querySnapshot.documents.map { doc in
+                        // map function iterates through the document array and performs the code on each of the items and return the result in collection
+                        
+                        return Book(id: doc.documentID,
+                                    title: doc["title"] as? String ?? "",
+                                    author: doc["author"] as? String ?? "",
+                                    pageNumber: doc["pageNum"] as? Int ?? 0,
+                                    rating: doc["rating"] as? Int ?? 0,
+                                    status: doc["status"] as? String ?? "",
+                                    genre: doc["genre"] as? String ?? "")
+                    }
+                }
+            } else {
+                // no data
+                
+            }
+        }
+    }
+    
 }

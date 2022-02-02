@@ -13,10 +13,13 @@ struct AddBookView: View {
     
     @State var bookTitle: String = ""
     @State var bookAuthor: String = ""
-    @State var bookPages: String = ""
+    @State var bookPages: String  = ""
     @State var selectedRating: Int = 0
     @State var selectedStatus: Int = 0
     @State var selectedGenre: Int = 0
+    
+    @State var errorMessage: String = ""
+    
     
     var body: some View {
         
@@ -65,11 +68,18 @@ struct AddBookView: View {
                     }
                 }
                 
+                Text(errorMessage)
+                    .padding(.horizontal, 10)
+                    .foregroundColor(.red)
+                
                 Button {
-                    // TDB action to submit book
-                    
+                    if bookTitle != "" && bookAuthor != "" && bookPages != "" {
+                        model.addBook(title: bookTitle, author: bookAuthor, pageNum: bookPages, rating: selectedRating, status: selectedStatus, genre: selectedGenre)
+                    } else {
+                        errorMessage = "Please enter book title, author and page number to submit book."
+                    }
                 } label: {
-                    Text("Submit Book")
+                    Text("Submit button")
                 }
                 
             }

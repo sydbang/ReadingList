@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Book: Identifiable{
+struct Book: Identifiable, Hashable{
     
     // ID is the document ID in the Firestore database
     var id: String
