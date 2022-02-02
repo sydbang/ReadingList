@@ -10,7 +10,7 @@ import Firebase
 
 class BookModel: ObservableObject {
     
-    @Published var books = [Book]()
+    @Published var books: [String: [Book]] = [:] // [Genre: [Book]]
     @Published var genres: [String] = []
     @Published var statuses: [String] = ["Plan to read", "Currently reading", "Completed"]
     
@@ -42,7 +42,7 @@ class BookModel: ObservableObject {
                 //Update the list property in the main thread since it causes UI change
                 DispatchQueue.main.async {
                     print("async start");
-                    self.books = querySnapshot.documents.map { doc in
+                    self.books["All"] = querySnapshot.documents.map { doc in
                         // map function iterates through the document array and performs the code on each of the items and return the result in collection
                         
                         
@@ -55,8 +55,10 @@ class BookModel: ObservableObject {
                                     genre: doc["genre"] as? String ?? "")
                     }
                     
-                    for book in self.books {
-                        self.addGenre(newGenre: book.genre)
+                    if self.books["All"] != nil {
+                        for book in self.books["All"]! {
+                            self.addGenre(newGenre: book.genre)
+                        }
                     }
                 }
             } else {
@@ -103,7 +105,7 @@ class BookModel: ObservableObject {
             } else if let querySnapshot = querySnapshot {
                 DispatchQueue.main.async {
                     print("async start");
-                    self.books = querySnapshot.documents.map { doc in
+                    self.books[genre] = querySnapshot.documents.map { doc in
                         // map function iterates through the document array and performs the code on each of the items and return the result in collection
                         
                         return Book(id: doc.documentID,
