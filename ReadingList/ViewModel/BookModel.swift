@@ -33,7 +33,6 @@ class BookModel: ObservableObject {
             } else if let querySnapshot = querySnapshot {
                 
                  for doc in querySnapshot.documents {
-                    print(doc.documentID)
                     self.addGenre(newGenre: doc.documentID)
                  }
 
@@ -50,6 +49,10 @@ class BookModel: ObservableObject {
         if self.genres.contains(newGenre) {
             return
         } else {
+            let db = Firestore.firestore()
+            let dbGenres = db.collection("Genres")
+            
+            dbGenres.document(newGenre).setData([:])
             self.genres.append(newGenre)
         }
     }
