@@ -10,17 +10,24 @@ import SwiftUI
 struct BookDetailView: View {
     
     @EnvironmentObject var model: BookModel
+    
+    var book: Book
+    
     @State var selectedRating: Int = 0
     @State var selectedStatus: Int = 0
     @State var selectedGenre: Int = 0
     
-    var book: Book
     
     var body: some View {
         VStack {
             ScrollView {
                 Text(book.title)
                     .font(.headline)
+                    .onAppear() {
+                        selectedRating = book.rating
+                        selectedStatus = model.statuses.firstIndex(of: book.status) ?? 0
+                        selectedGenre = model.genres.firstIndex(of: book.genre) ?? 0
+                    }
                 Text(book.author)
                 
                 if book.pageNumber != 0 {
@@ -30,6 +37,7 @@ struct BookDetailView: View {
                 
                 VStack {
                     Text("Rating:")
+                    
                     Picker(selection: $selectedRating, label: Text(""), content: {
                         ForEach(0..<6) { rating in
                             if (rating == 0) {

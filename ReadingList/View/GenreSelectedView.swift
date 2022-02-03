@@ -22,7 +22,6 @@ struct GenreSelectedView: View {
         
         if (model.books[genre] != nil) {
             
-            
             let books = model.books[genre]
             
             ForEach (books!, id: \.self) { book in
