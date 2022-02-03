@@ -73,7 +73,7 @@ struct BookDetailView: View {
                 }
                 
                 Button {
-                    // To do: button to delete book
+                    model.deleteBook(book: book)
                 } label: {
                     Text("Delete Book")
                 }

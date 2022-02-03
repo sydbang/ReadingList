@@ -98,18 +98,12 @@ class BookModel: ObservableObject {
                 //no data
             }
         }
-        /*
-         if self.books["All"] != nil && self.books[genre] != nil {
-         for book in self.books["All"]! {
-         if book.genre == genre {
-         self.books[genre]?.append(book)
-         
-         } else {
-         continue
-         }
-         }
-         }
-         */
     }
     
+    func deleteBook(book: Book) {
+        let db = Firestore.firestore()
+        let dbBooks = db.collection("Books")
+        
+        dbBooks.document(book.id).delete()
+    }
 }
