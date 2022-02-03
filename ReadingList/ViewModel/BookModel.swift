@@ -24,43 +24,19 @@ class BookModel: ObservableObject {
         // Get referecne to the database
         let db = Firestore.firestore()
         // Read the documents at a specific path
-        let dbBooks = db.collection("Books")
+        let dbGenres = db.collection("Genres")
         
-        dbBooks.getDocuments { (querySnapshot, error) in
+        dbGenres.getDocuments { (querySnapshot, error) in
             if let error = error {
                 print(error.localizedDescription)
                 print("it's erroring")
             } else if let querySnapshot = querySnapshot {
-                // Get all documents and create instances of the books
                 
-                /* Test block
                  for doc in querySnapshot.documents {
-                 print(doc.documentID)
+                    print(doc.documentID)
+                    self.addGenre(newGenre: doc.documentID)
                  }
-                 */
-                
-                //Update the list property in the main thread since it causes UI change
-                DispatchQueue.main.async {
-                    print("async start");
-                    self.books["All"] = querySnapshot.documents.map { doc in
-                        // map function iterates through the document array and performs the code on each of the items and return the result in collection
-                        
-                        
-                        return Book(id: doc.documentID,
-                                    title: doc["title"] as? String ?? "",
-                                    author: doc["author"] as? String ?? "",
-                                    pageNumber: doc["pageNum"] as? Int ?? 0,
-                                    rating: doc["rating"] as? Int ?? 0,
-                                    status: doc["status"] as? String ?? "",
-                                    genre: doc["genre"] as? String ?? "")
-                    }
-                    
-                    if self.books["All"] != nil {
-                        for book in self.books["All"]! {
-                            self.addGenre(newGenre: book.genre)
-                        }
-                    }
-                }
+
             } else {
                 // There is no data
                 print("data didn't come through")
@@ -97,31 +73,41 @@ class BookModel: ObservableObject {
         let db = Firestore.firestore()
         let dbBooks = db.collection("Books")
         
-        let query = dbBooks.whereField("genre", arrayContains: genre)
+        let query = dbBooks.whereField("genre", in: [genre])
         
         query.getDocuments { (querySnapshot, error) in
             if let error = error {
                 print(error.localizedDescription)
             } else if let querySnapshot = querySnapshot {
                 DispatchQueue.main.async {
-                    print("async start");
-                    self.books[genre] = querySnapshot.documents.map { doc in
-                        // map function iterates through the document array and performs the code on each of the items and return the result in collection
-                        
-                        return Book(id: doc.documentID,
-                                    title: doc["title"] as? String ?? "",
-                                    author: doc["author"] as? String ?? "",
-                                    pageNumber: doc["pageNum"] as? Int ?? 0,
-                                    rating: doc["rating"] as? Int ?? 0,
-                                    status: doc["status"] as? String ?? "",
-                                    genre: doc["genre"] as? String ?? "")
-                    }
+                self.books[genre] = querySnapshot.documents.map { doc in
+                    // map function iterates through the document array and performs the code on each of the items and return the result in collection
+                    
+                    return Book(id: doc.documentID,
+                                title: doc["title"] as? String ?? "",
+                                author: doc["author"] as? String ?? "",
+                                pageNumber: doc["pageNum"] as? Int ?? 0,
+                                rating: doc["rating"] as? Int ?? 0,
+                                status: doc["status"] as? String ?? "",
+                                genre: doc["genre"] as? String ?? "")
+                }
                 }
             } else {
-                // no data
-                
+                //no data
             }
         }
+        /*
+        if self.books["All"] != nil && self.books[genre] != nil {
+            for book in self.books["All"]! {
+                if book.genre == genre {
+                    self.books[genre]?.append(book)
+
+                } else {
+                    continue
+                }
+            }
+        }
+        */
     }
     
 }
