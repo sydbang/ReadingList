@@ -19,7 +19,6 @@ class BookModel: ObservableObject {
     }
     
     func getGenres() {
-        // This function should be able to fetch data from database
         
         // Get referecne to the database
         let db = Firestore.firestore()
@@ -32,10 +31,10 @@ class BookModel: ObservableObject {
                 print("it's erroring")
             } else if let querySnapshot = querySnapshot {
                 
-                 for doc in querySnapshot.documents {
+                for doc in querySnapshot.documents {
                     self.addGenre(newGenre: doc.documentID)
-                 }
-
+                }
+                
             } else {
                 // There is no data
                 print("data didn't come through")
@@ -83,34 +82,34 @@ class BookModel: ObservableObject {
                 print(error.localizedDescription)
             } else if let querySnapshot = querySnapshot {
                 DispatchQueue.main.async {
-                self.books[genre] = querySnapshot.documents.map { doc in
-                    // map function iterates through the document array and performs the code on each of the items and return the result in collection
-                    
-                    return Book(id: doc.documentID,
-                                title: doc["title"] as? String ?? "",
-                                author: doc["author"] as? String ?? "",
-                                pageNumber: doc["pageNum"] as? Int ?? 0,
-                                rating: doc["rating"] as? Int ?? 0,
-                                status: doc["status"] as? String ?? "",
-                                genre: doc["genre"] as? String ?? "")
-                }
+                    self.books[genre] = querySnapshot.documents.map { doc in
+                        // map function iterates through the document array and performs the code on each of the items and return the result in collection
+                        
+                        return Book(id: doc.documentID,
+                                    title: doc["title"] as? String ?? "",
+                                    author: doc["author"] as? String ?? "",
+                                    pageNumber: doc["pageNum"] as? Int ?? 0,
+                                    rating: doc["rating"] as? Int ?? 0,
+                                    status: doc["status"] as? String ?? "",
+                                    genre: doc["genre"] as? String ?? "")
+                    }
                 }
             } else {
                 //no data
             }
         }
         /*
-        if self.books["All"] != nil && self.books[genre] != nil {
-            for book in self.books["All"]! {
-                if book.genre == genre {
-                    self.books[genre]?.append(book)
-
-                } else {
-                    continue
-                }
-            }
-        }
-        */
+         if self.books["All"] != nil && self.books[genre] != nil {
+         for book in self.books["All"]! {
+         if book.genre == genre {
+         self.books[genre]?.append(book)
+         
+         } else {
+         continue
+         }
+         }
+         }
+         */
     }
     
 }

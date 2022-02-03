@@ -15,31 +15,29 @@ struct GenreSelectedView: View {
     
     var body: some View {
         
-        VStack {
-            Text(genre).font(.title2)
-                
-            if (model.books[genre] != nil) {
-                NavigationView {
-                    
-                    let books = model.books[genre]
-
-                    ForEach (books!, id: \.self) { book in
-                        NavigationLink (destination: BookDetailView(book: book)) {
-                            VStack (alignment: .leading){
-                            Text(book.title)
-                                .font(.headline)
-                                .padding(5)
-                                .padding(.leading, 10)
-                            Text(book.author)
-                                .padding(.leading, 20)
-                            }
-                        }
-                    }
-                    
-                }
-                
+        Text(genre).font(.title2)
+            .onAppear() {
+                model.getBooksByGenre(genre: genre)
             }
-        } 
+        
+        if (model.books[genre] != nil) {
+            
+            
+            let books = model.books[genre]
+            
+            ForEach (books!, id: \.self) { book in
+                NavigationLink (destination: BookDetailView(book: book)) {
+                    VStack (alignment: .leading){
+                        Text(book.title)
+                            .font(.headline)
+                            .padding(5)
+                            .padding(.leading, 10)
+                        Text(book.author)
+                            .padding(.leading, 20)
+                    }
+                }
+            }
+        }
     }
 }
 
