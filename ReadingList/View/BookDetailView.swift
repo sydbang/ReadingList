@@ -76,6 +76,7 @@ struct BookDetailView: View {
                     model.deleteBook(book: book)
                 } label: {
                     Text("Delete Book")
+                        .padding()
                 }
                 
                 Spacer()

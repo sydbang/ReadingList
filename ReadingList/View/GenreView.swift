@@ -40,10 +40,12 @@ struct GenreView: View {
                     ScrollView {
                         // Display genre with tappable navigation to view all books in given genre
                         ForEach (model.genres, id: \.self) { genre in
-                            NavigationLink (destination: GenreSelectedView(genre: genre)) {
+                            NavigationLink (destination:
+                                                List {
+                                                    GenreSelectedView(genre: genre)
+                                                }) {
                                 Text(genre)
                             }
-                            
                         }
                     }
                 }
