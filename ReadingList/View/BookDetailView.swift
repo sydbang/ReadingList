@@ -67,7 +67,12 @@ struct BookDetailView: View {
                 }
                 
                 Button {
-                    // To do: Save changes
+                    
+                    //Create a book with all the updated data
+                    let updatedBook = Book(id: book.id, title: book.title, author: book.author, pageNumber: book.pageNumber, rating: selectedRating, status: model.statuses[selectedStatus], genre: model.genres[selectedGenre])
+
+                    model.updateBook(book: updatedBook)
+
                 } label: {
                     Text("Save Change")
                 }

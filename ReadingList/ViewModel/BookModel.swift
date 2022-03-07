@@ -107,33 +107,11 @@ class BookModel: ObservableObject {
         dbBooks.document(book.id).delete()
     }
     
-    func updateBook(title: String, author: String, pageNum: String, rating: Int, status: Int, genre: Int) {
+    func updateBook(book: Book) {
         let db = Firestore.firestore()
         let dbBooks = db.collection("Books")
         
-        let intPageNum = Int(pageNum)
-        let statusString = self.statuses[status]
-        let genreString = self.genres[genre]
-        
-        var docID: String = ""
-        
-        // Check if book exist in the dbBook collection and grab document ID
-        let query = dbBooks
-            .whereField("title", in: [title])
-            .whereField("author", in: [author])
-            .whereField("pageNum", in: [intPageNum ?? 0])
-        
-        query.getDocuments { (querySnapshot, error) in
-            if let error = error {
-                print(error.localizedDescription)
-            } else if let querySnapshot = querySnapshot {
-                for doc in querySnapshot.documents{
-                    docID = doc.documentID
-                }
-            }
-        }
-        
-        dbBooks.document(docID).updateData(["rating": rating, "status": statusString, "genre": genreString])
+        dbBooks.document(book.id).updateData(["rating": book.rating, "status": book.status, "genre": book.genre])
         
         // refetch data
         getGenres()
